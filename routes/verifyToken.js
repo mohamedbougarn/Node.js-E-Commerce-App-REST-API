@@ -38,7 +38,7 @@ const veriftokenauthorisation = (req, res, next) =>{
 
 
 /** 
- * @veriftoken and @authorisation request
+ * @veriftoken and @authorisation admin request
  */
  const veriftokenAdmin = (req, res, next) =>{
     veriftoken(req,res,()=>{
