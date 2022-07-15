@@ -17,11 +17,11 @@
  ## Step to Start Project
  
 
-    1. `git clone https://github.com/mohamedbougarn/Node.js-E-Commerce-App-REST-API`
-    2. `cd Node.js-E-Commerce-App-REST-API`
-    3. `npm install` # installing the dependencies
-    4. `npm start` # or 'node .
-    
+ 1. `git clone https://github.com/mohamedbougarn/Node.js-E-Commerce-App-REST-API`
+ 2. `cd Node.js-E-Commerce-App-REST-API`
+ 3. `npm install` # installing the dependencies
+ 4. `npm start` # or 'node .
+ 
 ## Step to Configure app
 
 Open or create .env file. You will need:
