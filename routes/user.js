@@ -36,6 +36,20 @@ router.put('/:id', veriftokenauthorisation, async(req, res)=>{
 /**
  * DELATE user
  */
+router.delete('/id',veriftokenauthorisation,async(req,res)=>{
+
+  try {//for delete user info
+  await User.findByIdAndDelete(req.params.id)
+  res.status(200).json("User deleted seccessfully !")
+  }
+  catch(err)
+  {
+    res.status(500).json(err)
+  }
+
+})
+
+
 
 
 
