@@ -1,4 +1,4 @@
-const {veriftoken,veriftokenauthorisation} = require("./verifyToken")
+const {veriftoken,veriftokenauthorisation, veriftokenAdmin} = require("./verifyToken")
 const router = require('express').Router();
 const User = require("../models/User");
 
@@ -36,7 +36,7 @@ router.put('/:id', veriftokenauthorisation, async(req, res)=>{
 /**
  * DELATE user
  */
-router.delete('/id',veriftokenauthorisation,async(req,res)=>{
+router.delete('/:id',veriftokenauthorisation,async(req,res)=>{
 
   try {//for delete user info
   await User.findByIdAndDelete(req.params.id)
@@ -51,7 +51,42 @@ router.delete('/id',veriftokenauthorisation,async(req,res)=>{
 
 
 
+/**
+ * GET user
+ */
+ router.get('/find/:id',veriftokenAdmin,async(req,res)=>{
 
+  try {//for delete user info
+
+    const user = await User.findById(req.params.id)
+    const {password,...others} = user._doc;
+    res.status(200).json(others)
+  }
+  catch(err)
+  {
+    res.status(500).json(err)
+  }
+
+})
+
+
+/**
+ * GET all user
+ */
+ router.get('/find/:id',veriftokenAdmin,async(req,res)=>{
+
+  try {//for delete user info
+
+    const user = await User.findById(req.params.id)
+    const {password,...others} = user._doc;
+    res.status(200).json(others)
+  }
+  catch(err)
+  {
+    res.status(500).json(err)
+  }
+
+})
 
 
 module.exports = router;
