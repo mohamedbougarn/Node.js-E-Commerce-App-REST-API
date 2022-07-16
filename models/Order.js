@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const OrderSchema = mongoose.schema({
+const OrderSchema = mongoose.Schema({
 
     userId: {type: 'string', required: true,unique: true},
     products: [
