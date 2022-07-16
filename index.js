@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const userrouter = require("./routes/user"); 
 const authrouter = require("./routes/authentification"); 
+const productrouter = require("./routes/product"); 
 
 
 app.use(express.json());
@@ -21,6 +22,7 @@ console.log('test request sesessful');
 
 app.use("/api/auth",authrouter);
 app.use("/api/user",userrouter);
+app.use("/api/product",productrouter);
 
 
 app.listen(process.env.PORT || 3000 , ()=> {
