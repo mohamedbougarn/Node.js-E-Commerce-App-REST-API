@@ -2,10 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const app = express();
 const mongoose = require("mongoose");
-const userrouter = require("./routes/user"); 
-const authrouter = require("./routes/authentification"); 
-const productrouter = require("./routes/product"); 
-
+const userRoute = require("./routes/user"); 
+const authRoute = require("./routes/authentification"); 
+const productRoute = require("./routes/product"); 
+const cartRoute = require("./routes/cart");
 
 app.use(express.json());
 dotenv.config();
@@ -20,9 +20,10 @@ console.log('test request sesessful');
 })
 
 
-app.use("/api/auth",authrouter);
-app.use("/api/user",userrouter);
-app.use("/api/product",productrouter);
+app.use("/api/auth",authRoute);
+app.use("/api/user",userRoute);
+app.use("/api/product",productRoute);
+app.use("/api/cart",cartRoute);
 
 
 app.listen(process.env.PORT || 3000 , ()=> {
