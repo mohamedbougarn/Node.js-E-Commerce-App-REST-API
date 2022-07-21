@@ -1,6 +1,6 @@
 const {veriftoken,veriftokenauthorisation, veriftokenAdmin} = require("./verifyToken")
 const router = require('express').Router();
-const Orders = require("../models/Order");
+const Order = require("../models/Order");
 
 
 
@@ -9,7 +9,7 @@ const Orders = require("../models/Order");
  */
 router.post('/',veriftoken,async(req,res)=>
 {
-    const newOrder = new Orders(req.body)
+    const newOrder = new Order(req.body)
     try 
     {
         const savedOrder = await newOrder.save();
@@ -31,7 +31,7 @@ router.put('/:id', veriftokenAdmin, async(req, res)=>{
 
 
   try {//for update product by id info
-    const updateOrder = await Orders.findByIdAndUpdate(
+    const updateOrder = await Order.findByIdAndUpdate(
         req.params.id,
         {
         $set: req.body,
@@ -54,7 +54,7 @@ router.put('/:id', veriftokenAdmin, async(req, res)=>{
 router.delete('/:id',veriftokenAdmin,async(req,res)=>{
 
   try {//for delete user info
-  await product.findByIdAndDelete(req.params.id)
+  await Order.findByIdAndDelete(req.params.id)
   res.status(200).json("product deleted seccessfully !")
   }
   catch(err)
@@ -67,14 +67,14 @@ router.delete('/:id',veriftokenAdmin,async(req,res)=>{
 
 
 /**
- * GET product info
+ * GET user orders  product info
  */
- router.get('/find/:id',veriftokenAdmin,async(req,res)=>{
+ router.get('/find/:userId',veriftokenauthorisation,async(req,res)=>{
 
   try {//for 
 
-    const product = await Product.findById(req.params.id)
-    res.status(200).json(product)
+    const orders = await Orders.find({userID: req.params.userId});
+    res.status(200).json(orders)
   }
   catch(err)
   {
@@ -85,39 +85,27 @@ router.delete('/:id',veriftokenAdmin,async(req,res)=>{
 
 
 /**
- * GET all products info
+ * GET all orders info
  */
- router.get('/',async(req,res)=>{
+ router.get('/',veriftokenAdmin,async(req,res)=>{
 
-    const querynew = req.query.new
-    const qcategory = req.query.category
-  try {//for delete user info
-
-    let products;
-    if(querynew)
-    {
-        products = await Product.find().sort({createdAt : -1}).limit(5);
-    }
-    else if(qcategory)
-    {   
-        products = await Product.find({category : {
-            $in : [qcategory],
-        }, 
-
-    })
-    }else
-    {
-        products = await Product.find();
-
-    }
-    res.status(200).json(products)
+  try {
+    let orders;
+        orders = await Orders.find();
+   
+    res.status(200).json(orders)
   }
   catch(err)
   {
     res.status(500).json(err)
   }
 
-})
+});
+
+
+
+
+
 
 
 module.exports = router;
