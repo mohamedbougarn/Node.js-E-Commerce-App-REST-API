@@ -103,8 +103,40 @@ router.delete('/:id',veriftokenAdmin,async(req,res)=>{
 });
 
 
+/**
+ * 
+ * GET  monthly
+ */
 
+router.get('/getincoming',veriftokenAdmin, async(req, res)=>{
+const date = new Date();
+const lastmonth = new Date(date.setMonth(date.getMonth() -1 ));
+const pmonth = new Date(new Date().setMonth(lastmonth.getMonth() -1 ));
 
+try {
+    const income = await Order.aggregate([
+        { $match: { createdAt: { $gte: previousMonth } } },
+        {
+          $project: {
+            month: { $month: "$createdAt" },
+            sales: "$amount",
+          },
+        },
+        {
+          $group: {
+            _id: "$month",
+            total: { $sum: "$sales" },
+          },
+        },
+      ]);
+      res.status(200).json(income);
+    
+
+} catch (error) {
+    res.status(500).json(error)
+}
+
+});
 
 
 
