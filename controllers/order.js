@@ -7,7 +7,7 @@ const Order = require("../models/Order");
  * @create order 
  */
 //router.post('/',veriftoken,async(req,res)=>
-const CreateOrder = async(req,res)=>
+const createOrder = async(req,res)=>
 {
     eriftoken = req.headers.authorization;
     const newOrder = new Order(req.body)
@@ -29,7 +29,7 @@ const CreateOrder = async(req,res)=>
  * UPDATE order fid by id
  */
 //router.put('/:id', veriftokenAdmin, async(req, res)=>{
-const UpdatedOrderId =  async(req, res)=>{
+const updatedOrderId =  async(req, res)=>{
     veriftokenAdmin = req.headers.authorization;
   try {//for update product by id info
     const updateOrder = await Order.findByIdAndUpdate(
@@ -53,7 +53,7 @@ const UpdatedOrderId =  async(req, res)=>{
  * DELATE order
  */
 //router.delete('/:id',veriftokenAdmin,async(req,res)=>{  
-const DelateOrderById = async(req,res)=>{
+const delateOrderById = async(req,res)=>{
 veriftokenAdmin = req.headers.authorization;
   try {//for delete user info
   await Order.findByIdAndDelete(req.params.id)
@@ -70,7 +70,7 @@ veriftokenAdmin = req.headers.authorization;
  * GET user orders  product info
  * get('/find/:userId'
  */
- const GetUserOrderProductInfo = async(req,res)=>{
+ const getUserOrderProductInfo = async(req,res)=>{
     veriftokenauthorisation = req.headers.authorization;
     try {//for 
   
@@ -89,7 +89,7 @@ veriftokenAdmin = req.headers.authorization;
    * GET all orders info
    * get('/')
    */
-   const GetAll =async(req,res)=>{
+   const getAll =async(req,res)=>{
     veriftokenAdmin= req.headers.authorization;
     try {
       let orders;
@@ -111,7 +111,7 @@ veriftokenAdmin = req.headers.authorization;
    * get('/getincoming'
    */
   
-  const GetMonthlyIncoming = async(req, res)=>{
+  const getMonthlyIncoming = async(req, res)=>{
 
     veriftokenAdmin = req.headers.authorization;
     const date = new Date();
@@ -146,12 +146,12 @@ veriftokenAdmin = req.headers.authorization;
   
   
   module.exports = {
-    CreateOrder,
-    GetAll,
-    GetUserOrderProductInfo,
-    DelateOrderById,
-    GetMonthlyIncoming,
-    UpdatedOrderId
+    createOrder,
+    getAll,
+    getUserOrderProductInfo,
+    delateOrderById,
+    getMonthlyIncoming,
+    updatedOrderId
 };
   
   
