@@ -1,5 +1,5 @@
 const {veriftoken,veriftokenauthorisation, veriftokenAdmin} = require("../controllers/verifyToken")
-const router = require('express').Router();
+//const router = require('express').Router();
 const Cart = require("../models/cart");
 
 /**
