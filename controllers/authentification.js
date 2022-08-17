@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 /***regiseter route*/
 //router.post('/regiseter',
-const Register = async(req,res) => {
+const registerUser = async(req,res) => {
 
     const newUser = new User({
         username: req.body.username,
@@ -30,7 +30,7 @@ const Register = async(req,res) => {
 
 /***regiseter route*/
 //router.post('/login',
-const login = async(req,res) => {
+const loginUser = async(req,res) => {
     try {
         const user = await User.findOne(
             {
@@ -66,6 +66,6 @@ const login = async(req,res) => {
 
 module.exports = 
 {
-    Register,
-    login
+    registerUser,
+    loginUser
 };
