@@ -28,7 +28,7 @@ const Cart = require("../models/cart");
   */
  //router.put('/:id', veriftokenauthorisation, async(req, res)=>{
  
- const UpdateCartById = async(req, res)=>{
+ const updateCartById = async(req, res)=>{
  
     veriftokenauthorisation = req.headers.authorization
    try {//for update product by id info
@@ -54,7 +54,7 @@ const Cart = require("../models/cart");
   */
  //router.delete('/:id',veriftokenauthorisation,async(req,res)=>{
     
- const DeleteCart = async(req,res)=>{
+ const deleteCart = async(req,res)=>{
     veriftokenauthorisation = req.headers.authorization;
    try {//for delete user info
    await Cart.findByIdAndDelete(req.params.id)
@@ -74,7 +74,7 @@ const Cart = require("../models/cart");
   */
  // router.get('/find/:userid',veriftokenauthorisation,async(req,res)=>{
     
-const FindUserCartById = async(req,res)=>{
+const findUserCartById = async(req,res)=>{
  
     veriftokenauthorisation = req.headers.authorization;
    try {//for 
@@ -95,7 +95,7 @@ const FindUserCartById = async(req,res)=>{
   */
   //router.get('/',veriftokenAdmin,async(req,res)=>{
     
-  const GetAll =  async(req,res)=>{
+  const getAll =  async(req,res)=>{
    veriftokenAdmin = req.headers.authorization;  
    try {
     const cart =await Cart.find();
@@ -111,8 +111,8 @@ const FindUserCartById = async(req,res)=>{
  
  module.exports = {
     create_cart,
-    UpdateCartById,
-    DeleteCart,
-    FindUserCartById,
-    GetAll
+    updateCartById,
+    deleteCart,
+    findUserCartById,
+    getAll
 };
