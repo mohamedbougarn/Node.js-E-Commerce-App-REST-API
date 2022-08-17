@@ -29,7 +29,7 @@ const CreateOrder = async(req,res)=>
  * UPDATE order fid by id
  */
 //router.put('/:id', veriftokenAdmin, async(req, res)=>{
-constUpdatedOrderId =  async(req, res)=>{
+const UpdatedOrderId =  async(req, res)=>{
     veriftokenAdmin = req.headers.authorization;
   try {//for update product by id info
     const updateOrder = await Order.findByIdAndUpdate(
@@ -64,4 +64,95 @@ veriftokenAdmin = req.headers.authorization;
     res.status(500).json(err)
   }
 
-}
+};
+
+/**
+ * GET user orders  product info
+ * get('/find/:userId'
+ */
+ const GetUserOrderProductInfo = async(req,res)=>{
+    veriftokenauthorisation = req.headers.authorization;
+    try {//for 
+  
+      const orders = await Orders.find({userID: req.params.userId});
+      res.status(200).json(orders)
+    }
+    catch(err)
+    {
+      res.status(500).json(err)
+    }
+  
+  };
+  
+  
+  /**
+   * GET all orders info
+   * get('/')
+   */
+   const GetAll =async(req,res)=>{
+    veriftokenAdmin= req.headers.authorization;
+    try {
+      let orders;
+          orders = await Orders.find();
+     
+      res.status(200).json(orders)
+    }
+    catch(err)
+    {
+      res.status(500).json(err)
+    }
+  
+  };
+  
+  
+  /**
+   * 
+   * GET  monthly
+   * get('/getincoming'
+   */
+  
+  const GetMonthlyIncoming = async(req, res)=>{
+
+    veriftokenAdmin = req.headers.authorization;
+    const date = new Date();
+    const lastmonth = new Date(date.setMonth(date.getMonth() -1 ));
+    const pmonth = new Date(new Date().setMonth(lastmonth.getMonth() -1 ));
+    
+    try {
+        const income = await Order.aggregate([
+            { $match: { createdAt: { $gte: previousMonth } } },
+            {
+                $project: {
+                month: { $month: "$createdAt" },
+                sales: "$amount",
+                },
+            },
+            {
+                $group: {
+                _id: "$month",
+                total: { $sum: "$sales" },
+                },
+            },
+            ]);
+            res.status(200).json(income);
+        
+    
+    } catch (error) {
+        res.status(500).json(error)
+    }
+    
+  };
+  
+  
+  
+  module.exports = {
+    CreateOrder,
+    GetAll,
+    GetUserOrderProductInfo,
+    DelateOrderById,
+    GetMonthlyIncoming,
+    UpdatedOrderId
+};
+  
+  
+  
