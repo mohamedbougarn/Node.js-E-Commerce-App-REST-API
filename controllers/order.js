@@ -1,4 +1,4 @@
-const {veriftoken,veriftokenauthorisation, veriftokenAdmin} = require("../controllers/verifyToken")
+const {veriftoken,veriftokenauthorisation, veriftokenAdmin} = require("./verifyToken");
 //const router = require('express').Router();
 const Order = require("../models/Order");
 
@@ -9,7 +9,7 @@ const Order = require("../models/Order");
 //router.post('/',veriftoken,async(req,res)=>
 const createOrder = async(req,res)=>
 {
-    eriftoken = req.headers.authorization;
+    veriftoken = req.headers.authorization;
     const newOrder = new Order(req.body)
     try 
     {
