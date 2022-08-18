@@ -1,4 +1,4 @@
-const {veriftokenAdmin} = require("../controllers/verifyToken")
+const {veriftokenAdmin} = require("./verifyToken")
 //const router = require('express').Router();
 const Product = require("../models/Product");
 
