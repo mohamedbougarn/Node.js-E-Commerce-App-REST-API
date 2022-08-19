@@ -4,10 +4,6 @@ const router = require('express').Router();
 const product = require('../controllers/product'); 
 
 
-
-
-
-
 //create new product
 router.post('/',veriftokenAdmin,product.createProduct);
 // update product by id
@@ -18,8 +14,6 @@ router.delete('/:id',veriftokenAdmin,product.delateProduct);
 router.get('/find/:id',veriftokenAdmin,product.getProductById);
 // get all products
 router.get('/',veriftokenAdmin,product.getAllProductsInfo);
-
-
 
 
 module.exports = router;
