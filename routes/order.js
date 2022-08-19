@@ -1,86 +1,25 @@
 const {veriftoken,veriftokenauthorisation, veriftokenAdmin} = require("../controllers/verifyToken")
 const router = require('express').Router();
-const Order = require("../models/Order");
+const Ordercontrollers = require("../controllers/order");
 
 
 /**
  * @create order 
  */
-router.post('/',veriftoken,async(req,res)=>
-{
-    const newOrder = new Order(req.body)
-    try 
-    {
-        const savedOrder = await newOrder.save();
-        res.status(200).json(savedOrder);
-    }
-    catch(err) 
-    {
-        res.status(500).json(err)
-    }
-
-});
+//for create order
+router.post('/',veriftoken,Ordercontrollers.createOrder);
 
 
 
-/***
- * UPDATE order fid by id
- */
-router.put('/:id', veriftokenAdmin, async(req, res)=>{
+//for update order by id
+router.put('/:id', veriftokenAdmin,Ordercontrollers.updatedOrderId );
 
 
-  try {//for update product by id info
-    const updateOrder = await Order.findByIdAndUpdate(
-        req.params.id,
-        {
-        $set: req.body,
-    },
-    {
-        new : true
-    });
-    res.status(200).json(updateOrder)
-  }
-  catch(e) {
-      res.status(500).json(e)
-  }
+//for delate order by id 
+router.delete('/:id',veriftokenAdmin, Ordercontrollers.delateOrderById);
 
-})
-
-
-/**
- * DELATE order
- */
-router.delete('/:id',veriftokenAdmin,async(req,res)=>{
-
-  try {//for delete user info
-  await Order.findByIdAndDelete(req.params.id)
-  res.status(200).json("product deleted seccessfully !")
-  }
-  catch(err)
-  {
-    res.status(500).json(err)
-  }
-
-})
-
-
-
-/**
- * GET user orders  product info
- */
- router.get('/find/:userId',veriftokenauthorisation,async(req,res)=>{
-
-  try {//for 
-
-    const orders = await Orders.find({userID: req.params.userId});
-    res.status(200).json(orders)
-  }
-  catch(err)
-  {
-    res.status(500).json(err)
-  }
-
-})
+//for get user orders product 
+router.get('/find/:userId',veriftokenauthorisation,Ordercontrollers.getUserOrderProductInfo)
 
 
 /**
