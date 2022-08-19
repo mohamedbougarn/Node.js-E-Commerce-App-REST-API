@@ -4,6 +4,26 @@ const Product = require("../models/Product");
 
 
 
+
+
+module.exports = function(app) {
+  const product = require('../controllers/product'); 
+  //create new product
+  app.post('/',veriftokenAdmin,product.createProduct);
+  // update product by id
+
+
+};
+
+
+
+
+
+
+
+
+
+
 /**
  * @create product 
  */
