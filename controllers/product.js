@@ -10,7 +10,7 @@ const Product = require("../models/Product");
 //router.post('/',
 const createProduct = async(req,res)=>
 {
-    veriftokenAdmin = req.headers.authorization; 
+    //veriftokenAdmin = req.headers.authorization; 
     const newprod = new Product(req.body)
     try 
     {
@@ -32,7 +32,7 @@ const createProduct = async(req,res)=>
 //router.put('/:id', 
 const updateProductById  = async(req, res)=>{
 
-    veriftokenAdmin = req.headers.authorization;
+    //veriftokenAdmin = req.headers.authorization;
    // veriftokenAdmin
   try {//for update product by id info
     const updateprod = await Product.findByIdAndUpdate(
@@ -58,7 +58,7 @@ const updateProductById  = async(req, res)=>{
  */
 //router.delete('/:id',
 const delateProduct = async(req,res)=>{
-  veriftokenAdmin
+  //veriftokenAdmin
   try {//for delete user info
   await product.findByIdAndDelete(req.params.id)
   res.status(200).json("product deleted seccessfully !")
