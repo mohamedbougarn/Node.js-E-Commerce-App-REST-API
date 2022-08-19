@@ -14,6 +14,7 @@ router.delate('/:id',veriftokenauthorisation,Cartcontroller.deleteCart);
 router.get('/find/:userid',veriftokenauthorisation,Cartcontroller.findUserCartById);
 //for get all cart
 router.get('/',veriftokenAdmin,Cartcontroller.getAll);
+
 module.exports = router;
 
 
