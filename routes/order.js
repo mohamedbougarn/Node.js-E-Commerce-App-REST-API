@@ -25,20 +25,8 @@ router.get('/find/:userId',veriftokenauthorisation,Ordercontrollers.getUserOrder
 /**
  * GET all orders info
  */
- router.get('/',veriftokenAdmin,async(req,res)=>{
-
-  try {
-    let orders;
-        orders = await Orders.find();
-   
-    res.status(200).json(orders)
-  }
-  catch(err)
-  {
-    res.status(500).json(err)
-  }
-
-});
+//for get all orders info
+ router.get('/',veriftokenAdmin,Ordercontrollers.getAll);
 
 
 /**
@@ -46,35 +34,7 @@ router.get('/find/:userId',veriftokenauthorisation,Ordercontrollers.getUserOrder
  * GET  monthly
  */
 
-router.get('/getincoming',veriftokenAdmin, async(req, res)=>{
-const date = new Date();
-const lastmonth = new Date(date.setMonth(date.getMonth() -1 ));
-const pmonth = new Date(new Date().setMonth(lastmonth.getMonth() -1 ));
-
-try {
-    const income = await Order.aggregate([
-        { $match: { createdAt: { $gte: previousMonth } } },
-        {
-          $project: {
-            month: { $month: "$createdAt" },
-            sales: "$amount",
-          },
-        },
-        {
-          $group: {
-            _id: "$month",
-            total: { $sum: "$sales" },
-          },
-        },
-      ]);
-      res.status(200).json(income);
-    
-
-} catch (error) {
-    res.status(500).json(error)
-}
-
-});
+router.get('/getincoming',veriftokenAdmin, Ordercontrollers.getMonthlyIncoming);
 
 
 
