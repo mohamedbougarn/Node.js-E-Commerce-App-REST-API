@@ -9,7 +9,7 @@ router.post('/',veriftoken,Cartcontroller.create_cart);
 //for update cart by id
 router.put('/:id',veriftokenauthorisation,Cartcontroller.updateCartById);
 //for delete cart by id
-router.delate('/:id',veriftokenauthorisation,Cartcontroller.deleteCart);
+router.delete('/:id',veriftokenauthorisation,Cartcontroller.deleteCart);
 //for get user cart
 router.get('/find/:userid',veriftokenauthorisation,Cartcontroller.findUserCartById);
 //for get all cart
