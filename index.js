@@ -12,6 +12,10 @@ app.use(express.json());
 dotenv.config();
 
 
+var cors = require('cors')
+
+app.use(cors()) // Use this after the variable declaration
+
 mongoose.connect(process.env.MONGO_URL)
 .then(()=> console.log('Connected to MongoDB: %s'))
 .catch((err)=>{console.log('MongoDB connection error: %s \n', err)});
