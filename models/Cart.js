@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CartSchema = mongoose.schema({
+const CartSchema = mongoose.Schema({
 
     userId: {type: 'string', required: true,unique: true},
     products: [

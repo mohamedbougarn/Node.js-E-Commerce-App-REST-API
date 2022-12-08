@@ -1,92 +1,42 @@
-const {veriftoken,veriftokenauthorisation, veriftokenAdmin} = require("./verifyToken")
+const {veriftoken,veriftokenauthorisation, veriftokenAdmin} = require("../controllers/verifyToken")
 const router = require('express').Router();
-const User = require("../models/User");
+const userController = require("../controllers/user");
 
 
-/***
+/*
  * UPDATE user
  */
-router.put('/:id', veriftokenauthorisation, async(req, res)=>{
-  if(req.body.password )
-  {
-    req.body.password = cryptojs.AES.encrypt(
-        req.body.password,
-        process.env.PASS
-    ).toString();
-  }
-
-  try {//for update user info
-    const updateuser = await User.findByIdAndUpdate(
-        req.params.id,
-        {
-        $set: req.body,
-    },
-    {
-        new : true
-    });
-    res.status(200).json(updateuser)
-  }
-  catch(e) {
-      res.status(500).json(e)
-  }
-
-})
+//for update user by id
+router.put('/:id', veriftokenauthorisation,userController.updateUser);
 
 
 /**
  * DELATE user
  */
-router.delete('/:id',veriftokenauthorisation,async(req,res)=>{
-
-  try {//for delete user info
-  await User.findByIdAndDelete(req.params.id)
-  res.status(200).json("User deleted seccessfully !")
-  }
-  catch(err)
-  {
-    res.status(500).json(err)
-  }
-
-})
-
+//for delate user by id
+router.delete('/:id',veriftokenauthorisation,userController.delateUser);
 
 
 /**
  * GET user
  */
- router.get('/find/:id',veriftokenAdmin,async(req,res)=>{
-
-  try {//for delete user info
-
-    const user = await User.findById(req.params.id)
-    const {password,...others} = user._doc;
-    res.status(200).json(others)
-  }
-  catch(err)
-  {
-    res.status(500).json(err)
-  }
-
-})
+ router.get('/find/:id',veriftokenAdmin,userController.getUserById)
 
 
 /**
  * GET all user
  */
- router.get('/find/:id',veriftokenAdmin,async(req,res)=>{
+//for get all user 
+ router.get('/',veriftokenAdmin,userController.getAllUsers);
 
-  try {//for delete user info
 
-    const user = await User.findById(req.params.id)
-    const {password,...others} = user._doc;
-    res.status(200).json(others)
-  }
-  catch(err)
-  {
-    res.status(500).json(err)
-  }
 
-})
+/**
+ * GET user stats for statistics user register per month
+ */
+//for get stat user registerd per month
+router.get('/stats',veriftokenAdmin,userController.getUserStats)
+
 
 
 module.exports = router;
